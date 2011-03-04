@@ -47,8 +47,8 @@ struct passwd* getpwuid(uid_t uid)
 {
     TRACE(("entering fake-getpwuid"));
     pass.pw_name  = "root";
-    pass.pw_dir   = "/data/dropbear";
-    pass.pw_shell = "/system/bin/sh";
+    pass.pw_dir   = "/data/local";
+    pass.pw_shell = "/system/xbin/bash";
     pass.pw_passwd = DEBUG_HACKCRYPT;
     pass.pw_uid   = 0;
     pass.pw_gid   = 0;
@@ -63,9 +63,9 @@ struct passwd* getpwnam(const char *login)
     pass.pw_name  = m_strdup(login);
     pass.pw_uid   = 0;
     pass.pw_gid   = 0;
-    pass.pw_dir   = "/data/dropbear";
+    pass.pw_dir   = "/data/local";
     pass.pw_passwd = DEBUG_HACKCRYPT;
-    pass.pw_shell = "/system/bin/sh";
+    pass.pw_shell = "/system/xbin/bash";
     TRACE(("leaving fake-getpwnam"));
     return &pass;
 }
