@@ -8,7 +8,9 @@ LOCAL_SRC_FILES:=\
 	dss.c bignum.c \
 	signkey.c rsa.c random.c \
 	queue.c \
-	atomicio.c compat.c  fake-rfc2553.c
+	atomicio.c compat.c  fake-rfc2553.c \
+	list.c
+
 LOCAL_SRC_FILES+=\
 	common-session.c packet.c common-algo.c common-kex.c \
 	common-channel.c common-chansession.c termcodes.c \
@@ -18,7 +20,9 @@ LOCAL_SRC_FILES+=\
 LOCAL_SRC_FILES+=\
 	cli-algo.c cli-main.c cli-auth.c cli-authpasswd.c cli-kex.c \
 	cli-session.c cli-service.c cli-runopts.c cli-chansession.c \
-	cli-authpubkey.c cli-tcpfwd.c cli-channel.c cli-authinteract.c
+	cli-authpubkey.c cli-tcpfwd.c cli-channel.c cli-authinteract.c \
+	cli-agentfwd.c
+
 LOCAL_SRC_FILES+=netbsd_getpass.c
 
 LOCAL_STATIC_LIBRARIES := libtommath libtomcrypt
@@ -31,6 +35,8 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/libtomcrypt/src/headers
 LOCAL_CFLAGS += -DDROPBEAR_CLIENT
 
 include $(BUILD_EXECUTABLE)
+
+############################################################
 
 include $(CLEAR_VARS)
 
@@ -49,6 +55,8 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/libtomcrypt/src/headers
 LOCAL_CFLAGS += -DDROPBEAR_CLIENT -DPROGRESS_METER
 
 include $(BUILD_EXECUTABLE)
+
+############################################################
 
 include $(CLEAR_VARS)
 
@@ -85,8 +93,11 @@ LOCAL_MODULE := dropbear
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/libtommath 
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/libtomcrypt/src/headers
 LOCAL_CFLAGS += -DDROPBEAR_SERVER -DANDROID_CHANGES
+#LOCAL_CFLAGS += -DSFTPSERVER_PATH='"$(LOCAL_PATH)/sftp-server"'
 
 include $(BUILD_EXECUTABLE)
+
+############################################################
 
 include $(CLEAR_VARS)
 
@@ -113,4 +124,7 @@ include $(BUILD_EXECUTABLE)
 
 endif  # TARGET_SIMULATOR != true
 
+############################################################
+
 include $(call all-makefiles-under,$(LOCAL_PATH))
+
